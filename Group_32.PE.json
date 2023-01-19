@@ -1,0 +1,21 @@
+{
+	"id": "3076e186-9f32-49e0-962e-542fc77a920f",
+	"name": "Group_32",
+	"values": [
+		{
+			"key": "ip_port",
+			"value": "http://162.55.220.72:5005",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "number",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2023-01-12T21:51:23.216Z",
+	"_postman_exported_using": "Postman/10.7.1"
+}

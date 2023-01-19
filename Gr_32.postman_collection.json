@@ -1,0 +1,429 @@
+{
+	"info": {
+		"_postman_id": "5fe1bf71-25ed-4829-9449-26927b67b49f",
+		"name": "Gr_32",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24112551"
+	},
+	"item": [
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"login_token = jsonData.token\r",
+							"     \r",
+							"console.log(login_token)\r",
+							"\r",
+							"pm.environment.set(\"token\", login_token )"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "login",
+							"value": "Marimins",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "35264517Sm",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{ip_port}}/login",
+					"host": [
+						"{{ip_port}}"
+					],
+					"path": [
+						"login"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Mari",
+							"disabled": true
+						},
+						{
+							"key": "age",
+							"value": "35",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Mari",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "age",
+							"value": "35",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "salary",
+							"value": "1500",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{ip_port}}/get_method?name=Mari&age=34",
+					"host": [
+						"{{ip_port}}"
+					],
+					"path": [
+						"get_method"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Mari"
+						},
+						{
+							"key": "age",
+							"value": "34"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let req_f = request.data\r",
+							"let resp_f = pm.response.json()\r",
+							"\r",
+							"let req_age = + req_f.age\r",
+							"let resp_age = + resp_f.age\r",
+							"let req_salary = +req_f.salary\r",
+							"let resp_salary_1_5_year = resp_f.family.u_salary_1_5_year\r",
+							"let children_2_name = resp_f.family.children[1][0]\r",
+							"\r",
+							"console.log(resp_salary_1_5_year)\r",
+							"\r",
+							"console.log(req_f)\r",
+							"console.log(\"req_age = \" + req_age)\r",
+							"console.log(\"resp_age = \" + resp_age)\r",
+							"console.log(\"resp_age = \" + typeof resp_age)\r",
+							"console.log(resp_f.family.children)\r",
+							"\r",
+							"\r",
+							"pm.test(\"Check_age\", function () {\r",
+							"          pm.expect(req_age).to.eql(resp_age);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check_salary_1_5_year\", function () {\r",
+							"          pm.expect(req_salary*4).to.eql(resp_salary_1_5_year);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"children_2_name\", function () {\r",
+							"          pm.expect(children_2_name).to.eql(\"Kate\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"name_type\", function () {\r",
+							"          pm.expect(resp_f.name).to.be.a(\"string\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"name_type\", function () {\r",
+							"          pm.expect(resp_f.salary).to.be.a(\"number\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"family\", function () {\r",
+							"          pm.expect(resp_f).to.have.property(\"family\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"All_properties\", function () {\r",
+							"          pm.expect(resp_f).to.have.all.keys(\"age\",\"family\",\"name\",\"salary\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Inner properties\", function () {\r",
+							"          pm.expect(resp_f.family).to.have.all.keys(\"children\",\"u_salary_1_5_year\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Mari",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "35",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{ip_port}}/user_info_3",
+					"host": [
+						"{{ip_port}}"
+					],
+					"path": [
+						"user_info_3"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Mari",
+							"disabled": true
+						},
+						{
+							"key": "age",
+							"value": "35",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ip_port}}/object_info_1?name=Mari&age=35&weight=53",
+					"host": [
+						"{{ip_port}}"
+					],
+					"path": [
+						"object_info_1"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Mari"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						},
+						{
+							"key": "weight",
+							"value": "53"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_4",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ip_port}}/object_info_2?name=Mari&age=35&salary=1200",
+					"host": [
+						"{{ip_port}}"
+					],
+					"path": [
+						"object_info_2"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Mari"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						},
+						{
+							"key": "salary",
+							"value": "1200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let req_f = request.data\r",
+							"\r",
+							"\r",
+							"console.log (req_f)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ip_port}}/object_info_3?name=Mari&age=35&salary=1200",
+					"host": [
+						"{{ip_port}}"
+					],
+					"path": [
+						"object_info_3"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Mari"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						},
+						{
+							"key": "salary",
+							"value": "1200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_6",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ip_port}}/object_info_4?name=Mari&age=35&salary=1200",
+					"host": [
+						"{{ip_port}}"
+					],
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Mari"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						},
+						{
+							"key": "salary",
+							"value": "1200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_7",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Mari",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "35",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1200",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{ip_port}}/user_info_2",
+					"host": [
+						"{{ip_port}}"
+					],
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {",
+					"     pm.response.to.have.status(200);",
+					"});"
+				]
+			}
+		}
+	]
+}
